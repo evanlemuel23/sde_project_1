@@ -10,14 +10,14 @@
    ============================================================ */
 :root {
   /* Color Palette */
-  --color-primary: #0a1628;
-  --color-accent: #f5a623;
-  --color-secondary: #00d4ff;
-  --color-background: #04080f;
-  --color-text: #e8edf5;
-  --color-text-dim: #a0afc4;
-  --color-card-bg: rgba(255, 255, 255, 0.04);
-  --color-card-border: rgba(255, 255, 255, 0.08);
+  --color-primary: #001f3f;
+  --color-accent: #00509e;
+  --color-secondary: #003366;
+  --color-background: #ffffff;
+  --color-text: #001f3f;
+  --color-text-dim: #555555;
+  --color-card-bg: rgba(0, 31, 63, 0.04);
+  --color-card-border: rgba(0, 31, 63, 0.08);
 
   /* Typography */
   --font-display: "Cormorant Garamond", serif;
@@ -88,7 +88,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffc655;
+  background: #3366cc;
 }
 
 /* Selection color */
@@ -272,6 +272,26 @@ p {
   font-size: 1.25rem;
 }
 
+/* logo image styling */
+.navbar-logo-img {
+  height: 2rem;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.inline-logo {
+  height: 1em;
+  width: auto;
+  vertical-align: middle;
+}
+
+.footer-logo-img {
+  height: 2rem;
+  width: auto;
+}
+
+
 .navbar-nav {
   display: flex;
   list-style: none;
@@ -380,30 +400,19 @@ p {
 }
 
 /* ============================================================
-   CUSTOM CURSOR (Glow effect)
+   CUSTOM CURSOR (Text "CiT")
    ============================================================ */
 .custom-cursor {
   position: fixed;
   pointer-events: none;
   z-index: var(--z-cursor);
   display: none;
-}
-
-.custom-cursor.dot {
-  width: 8px;
-  height: 8px;
-  background-color: white;
-  border-radius: 50%;
-  transform: translate(-4px, -4px);
-}
-
-.custom-cursor.ring {
-  width: 30px;
-  height: 30px;
-  border: 2px solid var(--color-accent);
-  border-radius: 50%;
-  transform: translate(-15px, -15px);
-  transition: all var(--transition-fast);
+  font-family: var(--font-display);
+  font-weight: bold;
+  color: var(--color-accent);
+  font-size: 1rem;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
 }
 
 body.cursor-enabled {
@@ -418,13 +427,11 @@ a, button, .clickable {
   cursor: pointer;
 }
 
-body.cursor-enabled a .custom-cursor.ring,
-body.cursor-enabled button .custom-cursor.ring,
-body.cursor-enabled .clickable .custom-cursor.ring {
-  width: 50px;
-  height: 50px;
-  transform: translate(-25px, -25px);
-  border-color: var(--color-secondary);
+/* hide default cursors when custom cursor active */
+body.cursor-enabled a,
+body.cursor-enabled button,
+body.cursor-enabled .clickable {
+  cursor: none;
 }
 
 /* ============================================================

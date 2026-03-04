@@ -66,27 +66,21 @@ function animateCountUp(element, target, duration = 2000) {
 
 class CustomCursor {
   constructor() {
-    this.dot = null;
-    this.ring = null;
+    this.cursorEl = null;
     this.mouseX = 0;
     this.mouseY = 0;
-    this.ringX = 0;
-    this.ringY = 0;
     this.init();
   }
 
   init() {
-    // Create cursor elements
-    this.dot = document.createElement("div");
-    this.dot.classList.add("custom-cursor", "dot");
+    // Create cursor element with text
+    this.cursorEl = document.createElement("div");
+    this.cursorEl.classList.add("custom-cursor");
+    this.cursorEl.textContent = "CiT";
 
-    this.ring = document.createElement("div");
-    this.ring.classList.add("custom-cursor", "ring");
+    document.body.appendChild(this.cursorEl);
 
-    document.body.appendChild(this.dot);
-    document.body.appendChild(this.ring);
-
-    // Check if cursor should be enabled (desktop)
+    // Enable only on non-mobile devices
     if (!this.isMobileDevice()) {
       document.body.classList.add("cursor-enabled");
     }
@@ -95,9 +89,6 @@ class CustomCursor {
     document.addEventListener("mousemove", (e) => this.onMouseMove(e));
     document.addEventListener("mousedown", () => this.onClick());
     document.addEventListener("mouseup", () => this.onMouseUp());
-
-    // Start animation loop for ring lag
-    this.animate();
   }
 
   isMobileDevice() {
@@ -110,29 +101,21 @@ class CustomCursor {
     this.mouseX = e.clientX;
     this.mouseY = e.clientY;
 
-    // Dot follows immediately
-    this.dot.style.left = this.mouseX + "px";
-    this.dot.style.top = this.mouseY + "px";
+    // Move the custom text cursor
+    this.cursorEl.style.left = this.mouseX + "px";
+    this.cursorEl.style.top = this.mouseY + "px";
   }
 
   onClick() {
-    this.ring.style.transform = "translate(-50%, -50%) scale(0.8)";
+    // optionally add click effect (scale down)
+    this.cursorEl.style.transform = "translate(-50%, -50%) scale(0.8)";
   }
 
   onMouseUp() {
-    this.ring.style.transform = "translate(-50%, -50%) scale(1)";
+    this.cursorEl.style.transform = "translate(-50%, -50%) scale(1)";
   }
 
-  animate() {
-    // Ring lags behind with easing
-    this.ringX += (this.mouseX - this.ringX) * 0.15;
-    this.ringY += (this.mouseY - this.ringY) * 0.15;
-
-    this.ring.style.left = this.ringX + "px";
-    this.ring.style.top = this.ringY + "px";
-
-    requestAnimationFrame(() => this.animate());
-  }
+  // animate method removed; only a simple text cursor follows the mouse
 }
 
 // ============================================================
@@ -239,7 +222,7 @@ class ParticleSystem {
 
       // Draw particle
       this.ctx.globalAlpha = particle.opacity;
-      this.ctx.fillStyle = "#f5a623";
+      this.ctx.fillStyle = "#00509e";
       this.ctx.beginPath();
       this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
       this.ctx.fill();
@@ -256,7 +239,7 @@ class ParticleSystem {
 
         if (distance < 100) {
           this.ctx.globalAlpha = distance / 500;
-          this.ctx.strokeStyle = "#f5a623";
+          this.ctx.strokeStyle = "#00509e";
           this.ctx.lineWidth = 0.5;
           this.ctx.beginPath();
           this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
@@ -627,8 +610,8 @@ class FormHandler {
     successMsg.textContent = "Form submitted successfully!";
     successMsg.style.cssText = `
       padding: 1rem;
-      background: #f5a623;
-      color: #0a1628;
+      background: #00509e;
+      color: #001f3f;
       border-radius: 8px;
       margin-top: 1rem;
       text-align: center;
